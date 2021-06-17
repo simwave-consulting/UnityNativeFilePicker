@@ -284,7 +284,7 @@ public static class NativeFilePicker
 	#endregion
 
 	#region Export Functions
-	public static Permission ExportFile( string filePath, FilesExportedCallback callback = null )
+	public static Permission ExportFile( string filePath, string rootFolder, FilesExportedCallback callback = null )
 	{
 		if( string.IsNullOrEmpty( filePath ) )
 			throw new ArgumentException( "Parameter 'filePath' is null or empty!" );
@@ -301,7 +301,7 @@ public static class NativeFilePicker
 				else if( extension.IndexOf( '.' ) == 0 )
 					extension = extension.Substring( 1 );
 
-				string destination = UnityEditor.EditorUtility.SaveFilePanel( "Select destination", Path.GetDirectoryName( filePath ), Path.GetFileName( filePath ), extension );
+				string destination = UnityEditor.EditorUtility.SaveFilePanel( "Select destination", Path.GetDirectoryName( rootFolder ), Path.GetFileName( filePath ), extension );
 				if( string.IsNullOrEmpty( destination ) )
 				{
 					if( callback != null )
